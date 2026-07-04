@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Main terracotta to saffron gradient -->
+    <linearGradient id="brandGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="oklch(0.52 0.18 30)" />
+      <stop offset="50%" stop-color="oklch(0.62 0.17 35)" />
+      <stop offset="100%" stop-color="oklch(0.72 0.18 52)" />
+    </linearGradient>
+    <!-- Flame gradient: saffron to warm gold -->
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="60%" y2="0%">
+      <stop offset="0%" stop-color="oklch(0.68 0.20 48)" />
+      <stop offset="60%" stop-color="oklch(0.78 0.17 58)" />
+      <stop offset="100%" stop-color="oklch(0.85 0.14 65)" stop-opacity="0.7" />
+    </linearGradient>
+    <!-- Inner highlight shimmer -->
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+    <!-- Soft glow filter -->
+    <filter id="glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <!-- Subtle drop shadow -->
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="oklch(0.35 0.14 30)" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Rounded square background pill -->
+  <rect x="24" y="24" width="464" height="464" rx="100" ry="100" fill="oklch(0.97 0.02 45)" />
+
+  <!-- Main D letterform — bold, modern, slightly condensed -->
+  <!-- The D: vertical stem on left, curved bowl on right -->
+  <g filter="url(#shadow)">
+    <path
+      d="
+        M 148 120
+        L 148 392
+        L 258 392
+        C 340 392, 390 340, 390 256
+        C 390 172, 340 120, 258 120
+        Z
+        M 210 175
+        L 252 175
+        C 305 175, 330 207, 330 256
+        C 330 305, 305 337, 252 337
+        L 210 337
+        Z
+      "
+      fill="url(#brandGrad)"
+    />
+  </g>
+
+  <!-- Shine overlay on D -->
+  <path
+    d="
+      M 148 120
+      L 148 255
+      L 210 255
+      L 210 175
+      L 252 175
+      C 285 175, 308 193, 320 220
+      C 308 148, 270 120, 258 120
+      Z
+    "
+    fill="url(#shineGrad)"
+  />
+
+  <!-- Flame / motion arc rising from the D — swooping up-right -->
+  <!-- Arc 1: main flame body -->
+  <path
+    d="
+      M 310 195
+      C 330 155, 360 118, 345 80
+      C 375 105, 385 148, 365 185
+      C 400 145, 405 95, 385 58
+      C 430 95, 435 160, 400 200
+      C 420 178, 418 148, 405 128
+      C 415 158, 408 192, 385 215
+      C 370 230, 345 238, 325 235
+      C 305 232, 295 215, 310 195
+      Z
+    "
+    fill="url(#flameGrad)"
+    opacity="0.95"
+  />
+
+  <!-- Flame inner highlight — brighter core -->
+  <path
+    d="
+      M 340 192
+      C 352 165, 365 135, 355 105
+      C 370 125, 375 158, 358 185
+      C 370 168, 370 145, 362 128
+      C 368 150, 362 178, 348 195
+      C 340 205, 327 210, 320 207
+      C 313 204, 312 195, 325 188
+      C 335 183, 340 192, 340 192
+      Z
+    "
+    fill="oklch(0.88 0.12 62)"
+    opacity="0.65"
+  />
+
+  <!-- Small motion speed lines — three arcs swooping right from the D bowl -->
+  <g opacity="0.55">
+    <!-- Speed arc 1 -->
+    <path
+      d="M 355 270 Q 400 258, 435 230"
+      fill="none"
+      stroke="url(#flameGrad)"
+      stroke-width="9"
+      stroke-linecap="round"
+    />
+    <!-- Speed arc 2 -->
+    <path
+      d="M 355 295 Q 400 290, 430 270"
+      fill="none"
+      stroke="url(#flameGrad)"
+      stroke-width="7"
+      stroke-linecap="round"
+    />
+    <!-- Speed arc 3 -->
+    <path
+      d="M 350 320 Q 390 320, 415 305"
+      fill="none"
+      stroke="url(#flameGrad)"
+      stroke-width="5"
+      stroke-linecap="round"
+    />
+  </g>
+</svg>

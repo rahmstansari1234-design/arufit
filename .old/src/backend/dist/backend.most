@@ -1,0 +1,369 @@
+// Version: 3.0.0
+type CallRecord__52248411 =
+  {
+    callId : Text;
+    callerId : Principal;
+    endedAt : ?Timestamp__301639476;
+    groupId : ?Text;
+    recipientId : Principal;
+    startedAt : Timestamp__301639476;
+    status : CallStatus__25797007
+  };
+type CallStatus__25797007 = {#active; #declined; #ended; #missed; #ringing};
+type ChatSettings__807086318 =
+  {
+    bubbleColorReceived : ?Text;
+    bubbleColorSent : ?Text;
+    chatName : ?Text;
+    disappearingMode : DisappearingMode__53321652;
+    isArchived : Bool;
+    isMuted : Bool;
+    muteUntil : ?Timestamp__301639476;
+    wallpaper : ?Text
+  };
+type Comment__549067859 =
+  {
+    authorId : Principal;
+    content : Text;
+    createdAt : Timestamp__301639476;
+    id : Text;
+    likesCount : Nat;
+    parentId : ?Text;
+    postId : Text
+  };
+type Data__628993992<T> = {var count : Nat__1040412405; elements : [var ?T]};
+type Data__80296667<K, V> =
+  {var count : Nat__1040412405; kvs : [var ?(K, V)]};
+type DisappearingMode__53321652 = {#d7; #h24; #off};
+type Follow__874632411 =
+  {
+    createdAt : Timestamp__301639476;
+    followeeId : Principal;
+    followerId : Principal
+  };
+type GroupChat__66168634 =
+  {
+    adminIds : [Principal];
+    avatarUrl : ?Text;
+    createdAt : Timestamp__301639476;
+    createdBy : Principal;
+    groupId : Text;
+    members : [Principal];
+    name : Text
+  };
+type GroupMessage__985127404 =
+  {
+    content : Text;
+    createdAt : Timestamp__301639476;
+    fromId : Principal;
+    groupId : Text;
+    id : Text;
+    mediaUrl : ?Text;
+    reactions : [(Text, [Principal])];
+    replyToId : ?Text;
+    status : MessageStatus__107998785
+  };
+type Internal__1007892817<T> =
+  {children : [var ?Node__918630472<T>]; data : Data__628993992<T>};
+type Internal__41346355<K, V> =
+  {children : [var ?Node__1000929467<K, V>]; data : Data__80296667<K, V>};
+type Leaf__693487502<T> = {data : Data__628993992<T>};
+type Leaf__712614010<K, V> = {data : Data__80296667<K, V>};
+type List__529703492<T> =
+  {
+    var blockIndex : Nat__1040412405;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__1040412405
+  };
+type List__560604548<T> = List__529703492<T>;
+type Map__222667396<K, V> = Map__912772452<K, V>;
+type Map__709709801<K, V> =
+  {var root : Node__1000929467<K, V>; var size : Nat__1040412405};
+type Map__912772452<K, V> = Map__709709801<K, V>;
+type MessageStatus__107998785 = {#delivered; #read; #sending; #sent};
+type Message__1035099053 =
+  {
+    content : Text;
+    createdAt : Timestamp__301639476;
+    disappearsAt : ?Timestamp__301639476;
+    emojiReaction : ?Text;
+    fromId : Principal;
+    id : Text;
+    mediaUrl : ?Text;
+    replyToId : ?Text;
+    status : MessageStatus__107998785;
+    toId : Principal
+  };
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__1000929467<K, V> =
+  {#internal : Internal__41346355<K, V>; #leaf : Leaf__712614010<K, V>};
+type Node__918630472<T> =
+  {#internal : Internal__1007892817<T>; #leaf : Leaf__693487502<T>};
+type NotificationType__185411214 =
+  {
+    #comment;
+    #follow;
+    #groupInvite;
+    #incomingCall;
+    #like;
+    #message;
+    #missedCall;
+    #postReaction;
+    #storyReply
+  };
+type Notification__766161334 =
+  {
+    actorId : Principal;
+    createdAt : Timestamp__301639476;
+    id : Text;
+    isRead : Bool;
+    notifType : NotificationType__185411214;
+    recipientId : Principal;
+    referenceId : ?Text
+  };
+type OldChatSettings__825935498 =
+  {
+    bubbleColorReceived : ?Text;
+    bubbleColorSent : ?Text;
+    chatName : ?Text;
+    disappearingMode : OldDisappearingMode__355642041;
+    isArchived : Bool;
+    isMuted : Bool;
+    muteUntil : ?Timestamp__817121181;
+    wallpaper : ?Text
+  };
+type OldComment__646683993 =
+  {
+    authorId : Principal;
+    content : Text;
+    createdAt : Timestamp__817121181;
+    id : Text;
+    likesCount : Nat;
+    parentId : ?Text;
+    postId : Text
+  };
+type OldDisappearingMode__355642041 = {#d7; #h24; #off};
+type OldFollow__483787056 =
+  {
+    createdAt : Timestamp__817121181;
+    followeeId : Principal;
+    followerId : Principal
+  };
+type OldMessageStatus__480633383 = {#delivered; #read; #sending; #sent};
+type OldMessage__897832057 =
+  {
+    content : Text;
+    createdAt : Timestamp__817121181;
+    disappearsAt : ?Timestamp__817121181;
+    emojiReaction : ?Text;
+    fromId : Principal;
+    id : Text;
+    mediaUrl : ?Text;
+    replyToId : ?Text;
+    status : OldMessageStatus__480633383;
+    toId : Principal
+  };
+type OldNotificationType__89303409 =
+  {#comment; #follow; #like; #message; #storyReply};
+type OldNotification__868316919 =
+  {
+    actorId : Principal;
+    createdAt : Timestamp__817121181;
+    id : Text;
+    isRead : Bool;
+    notifType : OldNotificationType__89303409;
+    recipientId : Principal;
+    referenceId : ?Text
+  };
+type OldPost__784581407 =
+  {
+    authorId : Principal;
+    caption : Text;
+    commentsCount : Nat;
+    createdAt : Timestamp__817121181;
+    id : Text;
+    likesCount : Nat;
+    mediaUrl : ?Text;
+    moodTag : ?Text;
+    visibility : {#everyone; #followers}
+  };
+type OldStory__1031011486 =
+  {
+    authorId : Principal;
+    caption : ?Text;
+    createdAt : Timestamp__817121181;
+    expiresAt : Timestamp__817121181;
+    id : Text;
+    mediaUrl : ?Text;
+    moodTag : ?Text;
+    viewedBy : [Principal]
+  };
+type OldUserProfile__416069324 =
+  {
+    avatarUrl : ?Text;
+    bio : Text;
+    coverUrl : ?Text;
+    createdAt : Timestamp__817121181;
+    displayName : Text;
+    followersCount : Nat;
+    followingCount : Nat;
+    id : Principal;
+    isVerified : Bool;
+    postsCount : Nat;
+    username : Text
+  };
+type PostReaction__102302293 =
+  {
+    createdAt : Timestamp__301639476;
+    emoji : Text;
+    postId : Text;
+    userId : Principal
+  };
+type PostVisibility__346838473 = {#everyone; #followers};
+type Post__252408759 =
+  {
+    authorId : Principal;
+    caption : Text;
+    commentsCount : Nat;
+    createdAt : Timestamp__301639476;
+    id : Text;
+    likesCount : Nat;
+    mediaUrl : ?Text;
+    moodTag : ?Text;
+    visibility : PostVisibility__346838473
+  };
+type Set__1052415927<T> = Set__310360741<T>;
+type Set__310360741<T> =
+  {var root : Node__918630472<T>; var size : Nat__1040412405};
+type Story__513080736 =
+  {
+    authorId : Principal;
+    caption : ?Text;
+    createdAt : Timestamp__301639476;
+    expiresAt : Timestamp__301639476;
+    id : Text;
+    mediaUrl : ?Text;
+    moodTag : ?Text;
+    viewedBy : [Principal]
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__817121181 = Int;
+type UserProfile__446616884 =
+  {
+    avatarUrl : ?Text;
+    bio : Text;
+    coverUrl : ?Text;
+    createdAt : Timestamp__301639476;
+    displayName : Text;
+    followersCount : Nat;
+    followingCount : Nat;
+    id : Principal;
+    isVerified : Bool;
+    postsCount : Nat;
+    username : Text
+  };
+actor ({
+  in chatSettings : Map__222667396<Text, OldChatSettings__825935498>;
+  in commentIdCounter : {var value : Nat};
+  in commentLikes : Map__222667396<Text, Set__1052415927<Principal>>;
+  in comments : List__560604548<OldComment__646683993>;
+  in follows : List__560604548<OldFollow__483787056>;
+  in messageIdCounter : {var value : Nat};
+  in messages : List__560604548<OldMessage__897832057>;
+  in notifIdCounter : {var value : Nat};
+  in notifications : List__560604548<OldNotification__868316919>;
+  in postIdCounter : {var value : Nat};
+  in postLikes : Map__222667396<Text, Set__1052415927<Principal>>;
+  in posts : List__560604548<OldPost__784581407>;
+  in profiles : Map__222667396<Principal, OldUserProfile__416069324>;
+  in stories : List__560604548<OldStory__1031011486>;
+  in storyIdCounter : {var value : Nat}
+}, {
+  stable callIdCounter : {var value : Nat};
+  stable callRecords :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?CallRecord__52248411]];
+      var elementIndex : Nat__1040412405
+    };
+  stable chatSettings :
+    {
+      var root : Node__1000929467<Text, ChatSettings__807086318>;
+      var size : Nat__1040412405
+    };
+  stable commentIdCounter : {var value : Nat};
+  stable commentLikes :
+    {
+      var root : Node__1000929467<Text, Set__1052415927<Principal>>;
+      var size : Nat__1040412405
+    };
+  stable comments :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Comment__549067859]];
+      var elementIndex : Nat__1040412405
+    };
+  stable follows :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Follow__874632411]];
+      var elementIndex : Nat__1040412405
+    };
+  stable groupIdCounter : {var value : Nat};
+  stable groupMessages :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?GroupMessage__985127404]];
+      var elementIndex : Nat__1040412405
+    };
+  stable groups :
+    {
+      var root : Node__1000929467<Text, GroupChat__66168634>;
+      var size : Nat__1040412405
+    };
+  stable messageIdCounter : {var value : Nat};
+  stable messages :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Message__1035099053]];
+      var elementIndex : Nat__1040412405
+    };
+  stable notifIdCounter : {var value : Nat};
+  stable notifications :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Notification__766161334]];
+      var elementIndex : Nat__1040412405
+    };
+  stable postIdCounter : {var value : Nat};
+  stable postLikes :
+    {
+      var root : Node__1000929467<Text, Set__1052415927<Principal>>;
+      var size : Nat__1040412405
+    };
+  stable postReactions :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?PostReaction__102302293]];
+      var elementIndex : Nat__1040412405
+    };
+  stable posts :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Post__252408759]];
+      var elementIndex : Nat__1040412405
+    };
+  stable profiles :
+    {
+      var root : Node__1000929467<Principal, UserProfile__446616884>;
+      var size : Nat__1040412405
+    };
+  stable stories :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Story__513080736]];
+      var elementIndex : Nat__1040412405
+    };
+  stable storyIdCounter : {var value : Nat}
+});

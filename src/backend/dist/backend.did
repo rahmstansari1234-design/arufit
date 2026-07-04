@@ -1,0 +1,317 @@
+type UserProfileView = 
+ record {
+   avatarUrl: opt text;
+   bio: text;
+   coverUrl: opt text;
+   createdAt: Timestamp;
+   displayName: text;
+   followersCount: nat;
+   followingCount: nat;
+   id: principal;
+   isFollowing: bool;
+   isVerified: bool;
+   postsCount: nat;
+   username: text;
+ };
+type UpsertProfileInput = 
+ record {
+   avatarUrl: opt text;
+   bio: text;
+   coverUrl: opt text;
+   displayName: text;
+   username: text;
+ };
+type Timestamp = int;
+type StoryView = 
+ record {
+   authorAvatarUrl: opt text;
+   authorDisplayName: text;
+   authorId: principal;
+   authorUsername: text;
+   caption: opt text;
+   createdAt: Timestamp;
+   expiresAt: Timestamp;
+   id: text;
+   mediaUrl: opt text;
+   moodTag: opt text;
+   viewedByMe: bool;
+   viewsCount: nat;
+ };
+type PostVisibility = 
+ variant {
+   everyone;
+   followers;
+ };
+type PostView = 
+ record {
+   authorAvatarUrl: opt text;
+   authorDisplayName: text;
+   authorId: principal;
+   authorUsername: text;
+   caption: text;
+   commentsCount: nat;
+   createdAt: Timestamp;
+   id: text;
+   likedByMe: bool;
+   likesCount: nat;
+   mediaUrl: opt text;
+   moodTag: opt text;
+   reactions: vec PostReactionSummary;
+   visibility: PostVisibility;
+ };
+type PostReactionSummary = 
+ record {
+   count: nat;
+   emoji: text;
+   reactedByMe: bool;
+ };
+type Page_4 = 
+ record {
+   hasMore: bool;
+   items: vec CallView;
+   nextCursor: opt text;
+ };
+type Page_3 = 
+ record {
+   hasMore: bool;
+   items: vec GroupMessageView;
+   nextCursor: opt text;
+ };
+type Page_2 = 
+ record {
+   hasMore: bool;
+   items: vec MessageView;
+   nextCursor: opt text;
+ };
+type Page_1 = 
+ record {
+   hasMore: bool;
+   items: vec NotificationView;
+   nextCursor: opt text;
+ };
+type Page = 
+ record {
+   hasMore: bool;
+   items: vec PostView;
+   nextCursor: opt text;
+ };
+type NotificationView = 
+ record {
+   actorAvatarUrl: opt text;
+   actorId: principal;
+   actorUsername: text;
+   createdAt: Timestamp;
+   id: text;
+   isRead: bool;
+   notifType: NotificationType;
+   recipientId: principal;
+   referenceId: opt text;
+ };
+type NotificationType = 
+ variant {
+   comment;
+   follow;
+   groupInvite;
+   incomingCall;
+   like;
+   message;
+   missedCall;
+   postReaction;
+   storyReply;
+ };
+type MessageView = 
+ record {
+   content: text;
+   createdAt: Timestamp;
+   disappearsAt: opt Timestamp;
+   emojiReaction: opt text;
+   fromId: principal;
+   id: text;
+   mediaUrl: opt text;
+   replyToId: opt text;
+   status: MessageStatus;
+   toId: principal;
+ };
+type MessageStatus = 
+ variant {
+   delivered;
+   read;
+   sending;
+   sent;
+ };
+type GroupMessageView = 
+ record {
+   content: text;
+   createdAt: Timestamp;
+   fromId: principal;
+   groupId: text;
+   id: text;
+   mediaUrl: opt text;
+   reactions: vec record {
+                    text;
+                    vec principal;
+                  };
+   replyToId: opt text;
+   senderAvatarUrl: opt text;
+   senderDisplayName: text;
+   senderUsername: text;
+   status: MessageStatus;
+ };
+type GroupChatView = 
+ record {
+   adminIds: vec principal;
+   avatarUrl: opt text;
+   createdAt: Timestamp;
+   createdBy: principal;
+   groupId: text;
+   lastMessage: opt text;
+   lastMessageAt: opt Timestamp;
+   memberProfiles: vec UserProfileView;
+   members: vec principal;
+   name: text;
+   unreadCount: nat;
+ };
+type DisappearingMode = 
+ variant {
+   d7;
+   h24;
+   off;
+ };
+type CreateStoryInput = 
+ record {
+   caption: opt text;
+   mediaUrl: opt text;
+   moodTag: opt text;
+ };
+type CreatePostInput = 
+ record {
+   caption: text;
+   mediaUrl: opt text;
+   moodTag: opt text;
+   visibility: PostVisibility;
+ };
+type CreateGroupInput = 
+ record {
+   avatarUrl: opt text;
+   memberIds: vec principal;
+   name: text;
+ };
+type Conversation = 
+ record {
+   lastMessage: opt text;
+   lastMessageAt: Timestamp;
+   participantId: principal;
+   unreadCount: nat;
+ };
+type CommentView = 
+ record {
+   authorAvatarUrl: opt text;
+   authorDisplayName: text;
+   authorId: principal;
+   authorUsername: text;
+   content: text;
+   createdAt: Timestamp;
+   id: text;
+   likedByMe: bool;
+   likesCount: nat;
+   parentId: opt text;
+   postId: text;
+ };
+type ChatSettings = 
+ record {
+   bubbleColorReceived: opt text;
+   bubbleColorSent: opt text;
+   chatName: opt text;
+   disappearingMode: DisappearingMode;
+   isArchived: bool;
+   isMuted: bool;
+   muteUntil: opt Timestamp;
+   wallpaper: opt text;
+ };
+type CallView = 
+ record {
+   callId: text;
+   callerAvatarUrl: opt text;
+   callerDisplayName: text;
+   callerId: principal;
+   callerUsername: text;
+   endedAt: opt Timestamp;
+   groupId: opt text;
+   recipientAvatarUrl: opt text;
+   recipientDisplayName: text;
+   recipientId: principal;
+   recipientUsername: text;
+   startedAt: Timestamp;
+   status: CallStatus;
+ };
+type CallStatus = 
+ variant {
+   active;
+   declined;
+   ended;
+   missed;
+   ringing;
+ };
+service : {
+  addComment: (postId: text, content: text, parentId: opt text) ->
+   (CommentView);
+  addGroupMember: (groupId: text, userId: principal) -> ();
+  createGroup: (input: CreateGroupInput) -> (GroupChatView);
+  createPost: (input: CreatePostInput) -> (PostView);
+  createStory: (input: CreateStoryInput) -> (StoryView);
+  deleteComment: (id: text) -> ();
+  deleteGroup: (groupId: text) -> ();
+  deletePost: (id: text) -> ();
+  demoteGroupAdmin: (groupId: text, userId: principal) -> ();
+  endCall: (callId: text) -> (CallView);
+  follow: (userId: principal) -> ();
+  getActiveStories: () -> (vec StoryView) query;
+  getCallHistory: (cursor: opt text) -> (Page_4) query;
+  getChatSettings: (userId: principal) -> (ChatSettings) query;
+  getComments: (postId: text) -> (vec CommentView) query;
+  getConversations: () -> (vec Conversation) query;
+  getFollowers: (userId: principal) -> (vec principal) query;
+  getFollowing: (userId: principal) -> (vec principal) query;
+  getGroupChats: () -> (vec GroupChatView) query;
+  getGroupMessages: (groupId: text, cursor: opt text) -> (Page_3) query;
+  getHomeFeed: (cursor: opt text) -> (Page) query;
+  getMessages: (userId: principal, cursor: opt text) -> (Page_2) query;
+  getMyProfile: () -> (opt UserProfileView) query;
+  getNotifications: (cursor: opt text) -> (Page_1) query;
+  getPost: (id: text) -> (opt PostView) query;
+  getPostReactions: (postId: text) -> (vec PostReactionSummary) query;
+  getProfile: (userId: principal) -> (opt UserProfileView) query;
+  getStoryViewers: (id: text) -> (vec UserProfileView) query;
+  getSuggestedUsers: () -> (vec UserProfileView) query;
+  getTrendingPosts: (cursor: opt text) -> (Page) query;
+  getUnreadCount: () -> (nat) query;
+  getUserPosts: (userId: principal, cursor: opt text) -> (Page) query;
+  isFollowing: (userId: principal) -> (bool) query;
+  leaveGroup: (groupId: text) -> ();
+  likeComment: (id: text) -> ();
+  likePost: (id: text) -> ();
+  listFollowers: (userId: principal) -> (vec UserProfileView) query;
+  listFollowing: (userId: principal) -> (vec UserProfileView) query;
+  markAllNotificationsRead: () -> ();
+  markAsRead: (userId: principal) -> ();
+  markNotificationRead: (id: text) -> ();
+  promoteGroupAdmin: (groupId: text, userId: principal) -> ();
+  reactToMessage: (messageId: text, emoji: text) -> ();
+  reactToPost: (postId: text, emoji: text) -> ();
+  removeGroupMember: (groupId: text, userId: principal) -> ();
+  removePostReaction: (postId: text) -> ();
+  searchUsers: (searchTerm: text) -> (vec UserProfileView) query;
+  sendGroupMessage: (groupId: text, content: text, mediaUrl: opt text,
+   replyToId: opt text) -> (GroupMessageView);
+  sendMessage: (toId: principal, content: text, mediaUrl: opt text,
+   replyToId: opt text) -> (MessageView);
+  startCall: (recipientId: principal) -> (CallView);
+  unfollow: (userId: principal) -> ();
+  unlikePost: (id: text) -> ();
+  updateCallStatus: (callId: text, status: CallStatus) -> (CallView);
+  updateChatSettings: (userId: principal, settings: ChatSettings) -> ();
+  updateGroupInfo: (groupId: text, name: opt text, avatarUrl: opt text) ->
+   (GroupChatView);
+  upsertProfile: (input: UpsertProfileInput) -> (UserProfileView);
+  viewStory: (id: text) -> ();
+}

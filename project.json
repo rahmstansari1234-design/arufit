@@ -1,0 +1,25 @@
+{
+  "overview": "Arufit is a premium Instagram + WhatsApp style social platform with group chats, animated post reactions, and video call UI.",
+  "features": [
+    "Instagram-style home feed with stories and posts",
+    "WhatsApp-style direct messaging with emoji reactions",
+    "Group chats with admin controls",
+    "6-emoji post reactions with animated bursts",
+    "Video call UI with mute, camera toggle, and PIP mode",
+    "Social profiles, follow/unfollow, and explore page",
+    "Dark mode and light mode with frosted glass design",
+    "Real-time notifications"
+  ],
+  "category": "social-platform",
+  "tags": [
+    "social",
+    "messaging",
+    "instagram",
+    "whatsapp",
+    "group-chat",
+    "reactions",
+    "video-call",
+    "premium-ux"
+  ],
+  "last_updated": "2026-06-02T11:44:59.708Z"
+}
